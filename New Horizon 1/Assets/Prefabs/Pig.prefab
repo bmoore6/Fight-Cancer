@@ -102,7 +102,8 @@ MonoBehaviour:
   FrontSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
   BackSprite: {fileID: 21300000, guid: 7fe40fde528c77f46845cfa352c09314, type: 3}
   LeftSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
-  BulletPrefab: {fileID: 0}
+  BulletPrefab: {fileID: 1492588457161438, guid: 727398dc19de41449bd287374eab7e91,
+    type: 2}
   moveSpeed: 3
 --- !u!212 &212516773828566900
 SpriteRenderer:
