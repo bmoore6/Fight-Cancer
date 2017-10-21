@@ -297,6 +297,10 @@ Prefab:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1097247333452036, guid: e2e2c0cff0135da4c9106d84b81ddb52, type: 2}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2e2c0cff0135da4c9106d84b81ddb52, type: 2}
   m_IsPrefabParent: 0
@@ -446,12 +450,12 @@ Prefab:
     - target: {fileID: 61561121492590914, guid: 5f4e354a0140d1144a43b3489a307d40,
         type: 2}
       propertyPath: m_Offset.y
-      value: -2.6978378
+      value: -4.9783173
       objectReference: {fileID: 0}
     - target: {fileID: 61561121492590914, guid: 5f4e354a0140d1144a43b3489a307d40,
         type: 2}
       propertyPath: m_Size.y
-      value: 23.07875
+      value: 18.517792
       objectReference: {fileID: 0}
     - target: {fileID: 61561121492590914, guid: 5f4e354a0140d1144a43b3489a307d40,
         type: 2}

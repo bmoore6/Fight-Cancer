@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     float bulletSpeed = 150;
+    public GameObject bulletParticle;
 
     // Use this for initialization
     void Start()
@@ -21,6 +22,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall")
         {
+            Instantiate(bulletParticle, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

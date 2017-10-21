@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: 87c7a63de21599342aab767e7f6d1b6d
-timeCreated: 1508561916
+timeCreated: 1508616758
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - particleEffect: {fileID: 1323419349806590, guid: d3e6f1e37dcbaff4883ad3fd9225bcad,
+  - bulletParticle: {fileID: 1247311496274568, guid: 3247a7e241ff2f94e9abd7c58a70a5dc,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
