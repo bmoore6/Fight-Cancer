@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    float bulletSpeed = 100;
 
     // Use this for initialization
     void Start()
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour
         Vector2 direction;
         direction.x = Mathf.Cos(rads);
         direction.y = Mathf.Sin(rads);
-        rb.AddForce(direction * 15, ForceMode2D.Impulse);
+        rb.AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
     }
 
     void OnBecameInvisible()
