@@ -16,7 +16,7 @@ TagManager:
   - 
   - Player_Layer
   - Tree_Layer
-  - 
+  - Bullet_Layer
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 3236075425
     locked: 0

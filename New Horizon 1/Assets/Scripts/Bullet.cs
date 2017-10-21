@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float bulletSpeed = 100;
+    float bulletSpeed = 150;
 
     // Use this for initialization
     void Start()
@@ -15,6 +15,14 @@ public class Bullet : MonoBehaviour
         direction.x = Mathf.Cos(rads);
         direction.y = Mathf.Sin(rads);
         rb.AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnBecameInvisible()

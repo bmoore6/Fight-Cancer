@@ -93,8 +93,6 @@ public class Player : MonoBehaviour
             projectile.transform.eulerAngles = new Vector3(0, 0, angle);
         }
 
-
-
     }
 
     // check for collision with wall
@@ -102,10 +100,9 @@ public class Player : MonoBehaviour
     {
 
         // if colliding with wall and moving vertically move back
-        if (coll.gameObject.tag == "Wall")
+        if (coll.gameObject.tag == ("Wall"))
         {
             rb2d.velocity = Vector3.zero;
-
         }
 
 
