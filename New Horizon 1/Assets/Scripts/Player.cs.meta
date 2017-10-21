@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: b091d9756b0445740ba29ed65d5a3146
-timeCreated: 1507913614
+timeCreated: 1508551058
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FrontSprite: {instanceID: 0}
+  - BackSprite: {instanceID: 0}
+  - LeftSprite: {instanceID: 0}
+  - BulletPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
