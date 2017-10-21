@@ -34,6 +34,7 @@ public class EnemyAi : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
+        rb2d.freezeRotation = true;
     }
 
     // Update is called once per frame
