@@ -628,6 +628,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 61561121492590914, guid: 5f4e354a0140d1144a43b3489a307d40,
         type: 2}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 4be587504b829bd6013095adb14b186dd0715fd5
       propertyPath: m_Size.x
       value: 12.020813
       objectReference: {fileID: 0}
@@ -636,10 +640,99 @@ Prefab:
       propertyPath: moveSpeed
       value: 50
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4e354a0140d1144a43b3489a307d40, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1283994279
+=======
+=======
+      propertyPath: patrolPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1681842220}
+>>>>>>> 63b9cf8a5e6d0ec4f09133ca1ca08b8a217d9081
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 64c51d69648600742b418407aa4d4f8c, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1882138694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1882138695}
+  m_Layer: 0
+  m_Name: PatrolTriangle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1882138695
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1882138694}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -30.799995, y: 160.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 317618059}
+  - {fileID: 877766506}
+  - {fileID: 1511754523}
+  m_Father: {fileID: 891934341}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1896577004 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4772415387640508, guid: 46ce75673bf7cbc41b011f21e41ee1d7,
+    type: 2}
+  m_PrefabInternal: {fileID: 504854165}
+--- !u!1 &1931870598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1931870599}
+  m_Layer: 0
+  m_Name: PatrolTopLeft2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1931870599
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1931870598}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -30.799995, y: 160.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 304652818}
+  - {fileID: 1828085915}
+  - {fileID: 2004233104}
+  m_Father: {fileID: 891934341}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1935781554 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1397552332863256, guid: 5f4e354a0140d1144a43b3489a307d40,
+    type: 2}
+  m_PrefabInternal: {fileID: 1132075428}
+--- !u!4 &1938372099 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4903775013860196, guid: 64c51d69648600742b418407aa4d4f8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1640028247}
+--- !u!1001 &1956808667
+>>>>>>> 4be587504b829bd6013095adb14b186dd0715fd5
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -942,4 +1035,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b01747f2bdbec49a1c5e3af84cd401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   target: {fileID: 1935781554}
+=======
+<<<<<<< HEAD
+  target: {fileID: 1935781554}
+=======
+  player: {fileID: 1935781554}
+--- !u!4 &2138299736 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4903775013860196, guid: 64c51d69648600742b418407aa4d4f8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1873781159}
+--- !u!4 &2139365861 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4413692410764638, guid: 46ce75673bf7cbc41b011f21e41ee1d7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1810726103}
+>>>>>>> 63b9cf8a5e6d0ec4f09133ca1ca08b8a217d9081
+>>>>>>> 4be587504b829bd6013095adb14b186dd0715fd5
