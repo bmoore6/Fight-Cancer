@@ -104,7 +104,7 @@ MonoBehaviour:
   LeftSprite: {fileID: 21300000, guid: e2fc057861460034e8a6b6e69c2d8a12, type: 3}
   BulletPrefab: {fileID: 1311370920955168, guid: 727398dc19de41449bd287374eab7e91,
     type: 2}
-  moveSpeed: 70
+  moveSpeed: 50
 --- !u!212 &212062037368827912
 SpriteRenderer:
   m_ObjectHideFlags: 1

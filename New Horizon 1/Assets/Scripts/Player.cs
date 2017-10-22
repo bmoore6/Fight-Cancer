@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     GameObject BulletPrefab;
 
     //set move speed
-    public float moveSpeed = 3f;
+    public float moveSpeed = 2f;
 
     //scale
     Vector3 Scale;

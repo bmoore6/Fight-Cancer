@@ -631,6 +631,11 @@ Prefab:
       propertyPath: m_Size.x
       value: 12.020813
       objectReference: {fileID: 0}
+    - target: {fileID: 114780240641506198, guid: 5f4e354a0140d1144a43b3489a307d40,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4e354a0140d1144a43b3489a307d40, type: 2}
   m_IsPrefabParent: 0
@@ -934,7 +939,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2131526072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7225dc90cd04b544fb724b6a3bc6e4eb, type: 3}
+  m_Script: {fileID: 11500000, guid: f6b01747f2bdbec49a1c5e3af84cd401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1935781554}
+  target: {fileID: 1935781554}
