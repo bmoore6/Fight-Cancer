@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAi : MonoBehaviour
+public class EnemyAiDelayed : MonoBehaviour
 {
-    //timer fields
+
     Timer spawnTimer;
+
     [SerializeField]
     float timeDelay;
 
@@ -111,5 +112,3 @@ public class EnemyAi : MonoBehaviour
         }
     }
 }
-	
-
