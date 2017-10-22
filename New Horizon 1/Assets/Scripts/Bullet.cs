@@ -25,6 +25,11 @@ public class Bullet : MonoBehaviour
             Instantiate(bulletParticle, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        if (collision.gameObject.tag == "Pig")
+        {
+            Instantiate(bulletParticle, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
     void OnBecameInvisible()
