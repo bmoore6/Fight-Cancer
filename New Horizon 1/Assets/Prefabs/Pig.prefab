@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61078666064895312}
   - component: {fileID: 50264744802733052}
   - component: {fileID: 114471590637836634}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb051dcd0f65d043a2ba772a1ec19e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeDelay: 0
   FrontSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
   BackSprite: {fileID: 21300000, guid: 7fe40fde528c77f46845cfa352c09314, type: 3}
   LeftSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
