@@ -8,7 +8,11 @@ TagManager:
   - Gate
   - Undefined
   - Pig
+<<<<<<< HEAD
   - bullet
+=======
+  - tree
+>>>>>>> 0a816a64d88d9ce9e9f86b4375a6dbe346a5f623
   layers:
   - Default
   - TransparentFX
