@@ -6,17 +6,25 @@ public class Player : MonoBehaviour
 {
 
     //assign sprites
-    [SerializeField]
+    /*[SerializeField]
     Sprite FrontSprite;
 
     [SerializeField]
     Sprite BackSprite;
 
     [SerializeField]
-    Sprite LeftSprite;
+    Sprite LeftSprite;*/
+
+    private enum Facing { down, up };
 
     [SerializeField]
     GameObject BulletPrefab;
+
+    [SerializeField]
+    GameObject frontSprites;
+
+    [SerializeField]
+    GameObject backSprites;
 
     //set move speed
     public float moveSpeed = 3f;
@@ -30,6 +38,8 @@ public class Player : MonoBehaviour
     //get sprite renderer
     SpriteRenderer sr;
 
+    private Facing direction;
+
 
 
     // Use this for initialization
@@ -37,6 +47,11 @@ public class Player : MonoBehaviour
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        direction = Facing.down;
+        frontSprites.SetActive(true);
+        frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+        backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+        backSprites.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,12 +63,18 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("Vertical") < 0)
             {
                 //assign sprite front
-                sr.sprite = FrontSprite;
+                //sr.sprite = FrontSprite;
+                frontSprites.SetActive(true);
+                backSprites.SetActive(false);
+                direction = Facing.down;
             }
             else
             {
                 //assigns sprite back
-                sr.sprite = BackSprite;
+                //sr.sprite = BackSprite;
+                frontSprites.SetActive(false);
+                backSprites.SetActive(true);
+                direction = Facing.up;
             }
 
             //Moves Forward and back along y axis  
@@ -65,13 +86,17 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                sr.sprite = LeftSprite;
-                sr.flipX = false;
+                //sr.sprite = LeftSprite;
+                //sr.flipX = false;
+                frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+                backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
             }
             else
             {
-                sr.sprite = LeftSprite;
-                sr.flipX = true;             
+                //sr.sprite = LeftSprite;
+                //sr.flipX = true; 
+                frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+                backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
             }
             //Moves Left and right along x Axis  
             rb2d.MovePosition(transform.position + Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
@@ -91,6 +116,42 @@ public class Player : MonoBehaviour
             GameObject projectile = Instantiate(BulletPrefab);
             projectile.transform.position = transform.position;
             projectile.transform.eulerAngles = new Vector3(0, 0, angle);
+            if(direction == Facing.down)
+            {
+                GetComponent<Animator>().Play("shoot_front");
+            }
+            else
+            {
+                GetComponent<Animator>().Play("shoot_back");
+            }
+        }
+
+        // Animation Logic
+
+        if(Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+        {
+            if(direction == Facing.down)
+            {
+                GetComponent<Animator>().Play("idle_front");
+            }
+            else
+            {
+                GetComponent<Animator>().Play("idle_back");
+            }
+        }
+
+        if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if(direction == Facing.down)
+            {
+                GetComponent<Animator>().Play("walk_front");
+                //walkFront.Play();
+            }
+            else
+            {
+                GetComponent<Animator>().Play("walk_back");
+                //walkBack.Play();
+            }
         }
 
     }
