@@ -10,6 +10,9 @@ public class TreeScript : MonoBehaviour {
     [SerializeField]
     Material mat;
 
+    [SerializeField]
+    float damage=.0001f;
+
     // Health of each tree must be between 0 and 1
     float health = 1;
 
@@ -54,5 +57,11 @@ public class TreeScript : MonoBehaviour {
         tempColor = permColor * health;
         rend.material.SetColor("_Color", tempColor);
     }
-    
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Pig"&&health>0)
+        {
+            health -= damage;
+        }
+    }
 }

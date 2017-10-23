@@ -8,6 +8,7 @@ TagManager:
   - Gate
   - Undefined
   - Pig
+  - tree
   layers:
   - Default
   - TransparentFX
