@@ -7,7 +7,19 @@ AnimatorController:
   m_PrefabInternal: {fileID: 0}
   m_Name: T_Cell
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: facing
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: speed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -169,29 +181,29 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102213412125405066}
-    m_Position: {x: 360, y: 0, z: 0}
+    m_Position: {x: 240, y: -36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102889624665354130}
-    m_Position: {x: 360, y: 120, z: 0}
+    m_Position: {x: 240, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102133410435089332}
-    m_Position: {x: 395, y: 185, z: 0}
+    m_Position: {x: 480, y: -36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102165668343371836}
-    m_Position: {x: 430, y: 250, z: 0}
+    m_Position: {x: 480, y: 84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102838898543390396}
-    m_Position: {x: 465, y: 315, z: 0}
+    m_Position: {x: 240, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102591586259937306}
-    m_Position: {x: 500, y: 380, z: 0}
+    m_Position: {x: 480, y: 240, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_AnyStatePosition: {x: 0, y: 0, z: 0}
+  m_EntryPosition: {x: 0, y: 120, z: 0}
+  m_ExitPosition: {x: 720, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102213412125405066}

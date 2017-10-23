@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b091d9756b0445740ba29ed65d5a3146
-timeCreated: 1508565200
+timeCreated: 1508780209
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -8,7 +8,7 @@ MonoImporter:
   - FrontSprite: {instanceID: 0}
   - BackSprite: {instanceID: 0}
   - LeftSprite: {instanceID: 0}
-  - BulletPrefab: {fileID: 1530470041172504, guid: 727398dc19de41449bd287374eab7e91,
+  - BulletPrefab: {fileID: 1311370920955168, guid: 727398dc19de41449bd287374eab7e91,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
