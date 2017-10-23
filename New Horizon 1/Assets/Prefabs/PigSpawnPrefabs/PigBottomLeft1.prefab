@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1796351774381880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,8 +80,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.9, y: 6.45}
-    newSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 5.09, y: 6.63}
+    newSize: {x: 5.09, y: 6.63}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -100,10 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb051dcd0f65d043a2ba772a1ec19e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pigParticle: {fileID: 0}
   timeDelay: 0
-  FrontSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
-  BackSprite: {fileID: 21300000, guid: 7fe40fde528c77f46845cfa352c09314, type: 3}
-  LeftSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
+  FrontSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
+  BackSprite: {fileID: 21300000, guid: 4392fe2e50a1a58438f8026bdb158494, type: 3}
+  LeftSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -119,10 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb051dcd0f65d043a2ba772a1ec19e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pigParticle: {fileID: 1475796948265586, guid: b98521fb626038447b47445326ab363a,
+    type: 2}
   timeDelay: 0
-  FrontSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
-  BackSprite: {fileID: 21300000, guid: 7fe40fde528c77f46845cfa352c09314, type: 3}
-  LeftSprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
+  FrontSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
+  BackSprite: {fileID: 21300000, guid: 4392fe2e50a1a58438f8026bdb158494, type: 3}
+  LeftSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
   patrolPoints: []
 --- !u!212 &212646177992221494
 SpriteRenderer:
@@ -155,13 +158,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 32e908db4cd89bc4294031075a95f552, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 5.09, y: 6.63}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

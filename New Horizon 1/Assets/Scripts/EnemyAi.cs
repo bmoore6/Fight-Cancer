@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
+    //exploding pig particle effect
+    [SerializeField]
+    GameObject pigParticle;
     //timer fields
     Timer spawnTimer;
     [SerializeField]
@@ -31,6 +34,10 @@ public class EnemyAi : MonoBehaviour
     int currentPatrolIndex;
 
     SpriteRenderer sr;
+
+    //count how many times the pig gets shot
+    private int hitCounter = 0;
+    private int hitsBeforeDeath = 5;
 
     // Use this for initialization
     void Start()
@@ -109,6 +116,24 @@ public class EnemyAi : MonoBehaviour
                 currentPatrolPoint = patrolPoints[currentPatrolIndex];
             }
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.tag == "bullet" && hitCounter > hitsBeforeDeath)
+        {
+            Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+
+            //destroy the bullet that collided with the pig
+            Destroy(collision.gameObject);
+
+            //destroy the pig!
+            Destroy(gameObject);
+        }
+
+        hitCounter += 1;
+
     }
 }
 	

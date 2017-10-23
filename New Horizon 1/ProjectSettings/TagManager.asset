@@ -8,6 +8,7 @@ TagManager:
   - Gate
   - Undefined
   - Pig
+  - bullet
   layers:
   - Default
   - TransparentFX

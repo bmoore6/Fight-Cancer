@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour
         }
         if (collision.gameObject.tag == "Pig")
         {
-            Instantiate(bulletParticle, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 2eb051dcd0f65d043a2ba772a1ec19e2
-timeCreated: 1508625782
+timeCreated: 1508724040
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pigParticle: {fileID: 1475796948265586, guid: b98521fb626038447b47445326ab363a,
+      type: 2}
+  - FrontSprite: {instanceID: 0}
+  - BackSprite: {instanceID: 0}
+  - LeftSprite: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
