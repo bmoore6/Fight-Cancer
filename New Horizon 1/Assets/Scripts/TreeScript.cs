@@ -61,7 +61,7 @@ public class TreeScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Pig"&&health>0)
         {
-            health -= damage;
+            this.Health -= damage;
         }
     }
 }
