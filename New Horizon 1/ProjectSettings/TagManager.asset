@@ -4,15 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
-  - Gate
-  - Undefined
-  - Pig
-<<<<<<< HEAD
-  - bullet
-=======
   - tree
->>>>>>> 0a816a64d88d9ce9e9f86b4375a6dbe346a5f623
+  - bullet
+  - Pig
+  - Gate
   layers:
   - Default
   - TransparentFX
@@ -22,10 +17,10 @@ TagManager:
   - UI
   - 
   - 
-  - Player_Layer
-  - Tree_Layer
-  - Bullet_Layer
-  - Enemy_Layer
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -49,7 +44,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Particle
-    uniqueID: 3236075425
     locked: 0
