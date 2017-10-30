@@ -5,16 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    //assign sprites
-    /*[SerializeField]
-    Sprite FrontSprite;
-
-    [SerializeField]
-    Sprite BackSprite;
-
-    [SerializeField]
-    Sprite LeftSprite;*/
-
     private enum Facing { down, up };
 
     [SerializeField]
@@ -63,7 +53,6 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("Vertical") < 0)
             {
                 //assign sprite front
-                //sr.sprite = FrontSprite;
                 frontSprites.SetActive(true);
                 backSprites.SetActive(false);
                 direction = Facing.down;
@@ -71,7 +60,6 @@ public class Player : MonoBehaviour
             else
             {
                 //assigns sprite back
-                //sr.sprite = BackSprite;
                 frontSprites.SetActive(false);
                 backSprites.SetActive(true);
                 direction = Facing.up;
@@ -86,21 +74,19 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                //sr.sprite = LeftSprite;
-                //sr.flipX = false;
                 frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
                 backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
             }
             else
             {
-                //sr.sprite = LeftSprite;
-                //sr.flipX = true; 
                 frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
                 backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
             }
             //Moves Left and right along x Axis  
             rb2d.MovePosition(transform.position + Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
         }
+
+        rb2d.MovePosition(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * moveSpeed * Time.deltaTime);
 
         //calculate angle to shoot bullet at
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -145,12 +131,10 @@ public class Player : MonoBehaviour
             if(direction == Facing.down)
             {
                 GetComponent<Animator>().Play("walk_front");
-                //walkFront.Play();
             }
             else
             {
                 GetComponent<Animator>().Play("walk_back");
-                //walkBack.Play();
             }
         }
 
@@ -165,7 +149,5 @@ public class Player : MonoBehaviour
         {
             rb2d.velocity = Vector3.zero;
         }
-
-
     }
 }
