@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: 102aeb5300c8da14985c2f45fec6bf04
-timeCreated: 1507779850
+timeCreated: 1509390816
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Pig_Head
+    21300002: Pig_Torso
+    21300004: Pig_Arm_R
+    21300006: Pig_Arm_L
+    21300008: Pig_Leg_R
+    21300010: Pig_Leg_L
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,7 +45,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -58,17 +64,165 @@ TextureImporter:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: tvOS
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Tizen
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Samsung TV
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Pig_Head
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 892
+        width: 186
+        height: 176
+      alignment: 9
+      pivot: {x: 0.5, y: 0.50852275}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pig_Torso
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 556
+        width: 203
+        height: 239
+      alignment: 9
+      pivot: {x: 0.5049261, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pig_Arm_R
+      rect:
+        serializedVersion: 2
+        x: 787.5
+        y: 552
+        width: 204
+        height: 219
+      alignment: 9
+      pivot: {x: 0.502451, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pig_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 532
+        width: 187
+        height: 259
+      alignment: 9
+      pivot: {x: 0.49465242, y: 0.503861}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pig_Leg_R
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 200.00002
+        width: 118
+        height: 279
+      alignment: 9
+      pivot: {x: 0.4957627, y: 0.5017921}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pig_Leg_L
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 149
+        width: 126
+        height: 312
+      alignment: 9
+      pivot: {x: 0.48809525, y: 0.5016026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
-  userData: 
+  userData: 98919436126914
   assetBundleName: 
   assetBundleVariant: 
