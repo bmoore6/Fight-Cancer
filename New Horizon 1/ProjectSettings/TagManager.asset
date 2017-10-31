@@ -9,6 +9,7 @@ TagManager:
   - Pig
   - Gate
   - Wall
+  - particleEffect
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - tree
   - bullet
   - pig
-  - 
+  - particleEffect
   - 
   - 
   - 

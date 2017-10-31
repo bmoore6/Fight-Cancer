@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 198094430211602222}
   - component: {fileID: 199256727663475606}
   - component: {fileID: 114096508474660178}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PigParticle
-  m_TagString: Untagged
+  m_TagString: particleEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
