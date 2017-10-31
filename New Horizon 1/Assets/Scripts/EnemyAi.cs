@@ -123,7 +123,7 @@ public class EnemyAi : MonoBehaviour
         if (collision.gameObject.tag == "bullet")
         {
             hitCounter += 1;
-            if (hitCounter > hitsBeforeDeath)
+            if (hitCounter >= hitsBeforeDeath)
             {
                 //destroy the pig!
                 Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
