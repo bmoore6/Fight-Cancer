@@ -120,23 +120,19 @@ public class EnemyAi : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if (collision.gameObject.tag == "bullet")
         {
-            //update hit counter
             hitCounter += 1;
-
-            if (hitCounter >= hitsBeforeDeath)
+            if (hitCounter > hitsBeforeDeath)
             {
-                //create exploding pig particle effect
-                Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
-
-                //destroy the bullet that collided with the pig
-                Destroy(collision.gameObject);
-
                 //destroy the pig!
+                Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
+                GameManager.win();
             }
+
+            //destroy the bullet that collided with the pig
+            Destroy(collision.gameObject);
         }
     }
 }
