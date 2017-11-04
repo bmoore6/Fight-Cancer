@@ -101,9 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 1311370920955168, guid: 727398dc19de41449bd287374eab7e91,
     type: 2}
+<<<<<<< HEAD
   frontSprites: {fileID: 0}
   backSprites: {fileID: 0}
   moveSpeed: 70
+=======
+  moveSpeed: 50
+>>>>>>> e72fa81863dda740e8a1834fdc97c2c7b11656ad
 --- !u!212 &212062037368827912
 SpriteRenderer:
   m_ObjectHideFlags: 1

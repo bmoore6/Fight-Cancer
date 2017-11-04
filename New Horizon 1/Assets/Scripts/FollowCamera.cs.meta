@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:New Horizon 1/Assets/Scripts/CameraController.cs.meta
+guid: 7225dc90cd04b544fb724b6a3bc6e4eb
+timeCreated: 1508972740
+=======
+guid: f6b01747f2bdbec49a1c5e3af84cd401
+timeCreated: 1508629544
+>>>>>>> e72fa81863dda740e8a1834fdc97c2c7b11656ad:New Horizon 1/Assets/Scripts/FollowCamera.cs.meta
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+<<<<<<< HEAD:New Horizon 1/Assets/Scripts/CameraController.cs.meta
+  - player: {fileID: 1443449994619320, guid: 3a39611a8cc23af449751b65b0a5c37b, type: 2}
+=======
+  - target: {fileID: 1397552332863256, guid: 5f4e354a0140d1144a43b3489a307d40, type: 2}
+>>>>>>> e72fa81863dda740e8a1834fdc97c2c7b11656ad:New Horizon 1/Assets/Scripts/FollowCamera.cs.meta
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
