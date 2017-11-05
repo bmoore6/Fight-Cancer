@@ -66,7 +66,7 @@ public class TreeScript : MonoBehaviour {
         {
             this.Health -= damage;
         }
-        else if (health < 100)
+        else if (health < 1)
         {
             this.Health += regen;
         }
