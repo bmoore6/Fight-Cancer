@@ -97,6 +97,8 @@ public class EnemyAi : MonoBehaviour
         //transform.Translate(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime * speed);
         rb2d.MovePosition(transform.position + direction * speed * Time.deltaTime);
 
+
+        //testing merge
         //set previous position to current
         if(pigState!=State.still)
         prevPosition = gameObject.transform.position;
