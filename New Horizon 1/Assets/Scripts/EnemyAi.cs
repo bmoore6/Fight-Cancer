@@ -144,7 +144,7 @@ public class EnemyAi : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<TreeScript>().Health <= 0)
+        if(collision.collider.tag == "tree" && collision.gameObject.GetComponent<TreeScript>().Health <= 0)
         {
             MoveOn();
         }
