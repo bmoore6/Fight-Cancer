@@ -12,10 +12,37 @@ public class GameManager : MonoBehaviour {
     GameObject[] trees;
     float percentHealth;
 
+    //pause menu
+    [SerializeField]
+    private Canvas pauseMenu;
+    [SerializeField]
+    private Canvas hudCanvas;
+    [SerializeField]
+    private Button quitButton;
+    [SerializeField]
+    private Button unPauseButton;
+
+    //singleton
+    public static GameManager GM = null;
+
 	// Use this for initialization
 	void Start() {
         percentHealth = 0;
         trees = GameObject.FindGameObjectsWithTag("tree");
+
+        // Button handling for pause menu
+        Button quitBtn = quitButton.GetComponent<Button>();
+        quitBtn.onClick.AddListener(goBackToMainMenu);
+        Button unPauseBtn = unPauseButton.GetComponent<Button>();
+        unPauseBtn.onClick.AddListener(unPause);
+
+        //Singleton (makes sure that there is only ever one instance of this code)
+        if (GM == null)
+            GM = this;
+        else if (GM != null)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame
@@ -34,6 +61,12 @@ public class GameManager : MonoBehaviour {
         {
 
         }
+
+        // Listen for pause key, pauses upon press.
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause();
+        }
 	}
     public static void win()
     {
@@ -45,5 +78,50 @@ public class GameManager : MonoBehaviour {
     public void lose()
     {
         SceneManager.LoadScene("LoseScn");
+    }
+
+    public bool isPause()
+    {
+        if (pauseMenu.gameObject.activeInHierarchy == false)
+            return false;
+        else
+            return true;
+    }
+
+    /// <summary>
+    /// Pauses the game.
+    /// </summary>
+    private void pause()
+    {
+        if (pauseMenu.gameObject.activeInHierarchy == false)
+        {
+            pauseMenu.gameObject.SetActive(true);
+           // hudCanvas.gameObject.SetActive(false);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pauseMenu.gameObject.SetActive(false);
+         //   hudCanvas.gameObject.SetActive(true);
+            Time.timeScale = 1;
+        }
+    }
+
+    /// <summary>
+    /// Loads the mainBody scene
+    /// </summary>
+    private void goBackToMainMenu()
+    {
+        SceneManager.LoadScene("MainBody");
+    }
+    
+    /// <summary>
+    /// Unpauses the game, upon push of a button.
+    /// </summary>
+    private void unPause()
+    {
+        pauseMenu.gameObject.SetActive(false);
+        hudCanvas.gameObject.SetActive(true);
+        Time.timeScale = 1;
     }
 }

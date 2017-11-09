@@ -89,26 +89,28 @@ public class Player : MonoBehaviour
         rb2d.MovePosition(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * moveSpeed * Time.deltaTime);
 
         //calculate angle to shoot bullet at
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float deltaX = mousePosition.x - transform.position.x;
-        float deltaY = mousePosition.y - transform.position.y;
-        float rads = Mathf.Atan2(deltaY, deltaX);
-        float angle = Mathf.Rad2Deg * rads;
-        //transform.eulerAngles = new Vector3(0, 0, angle);
-
-        //get shoot input
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.GM.isPause() == false)
         {
-            GameObject projectile = Instantiate(BulletPrefab);
-            projectile.transform.position = transform.position;
-            projectile.transform.eulerAngles = new Vector3(0, 0, angle);
-            if(direction == Facing.down)
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float deltaX = mousePosition.x - transform.position.x;
+            float deltaY = mousePosition.y - transform.position.y;
+            float rads = Mathf.Atan2(deltaY, deltaX);
+            float angle = Mathf.Rad2Deg * rads;
+            //transform.eulerAngles = new Vector3(0, 0, angle);
+            //get shoot input
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Animator>().Play("shoot_front");
-            }
-            else
-            {
-                GetComponent<Animator>().Play("shoot_back");
+                GameObject projectile = Instantiate(BulletPrefab);
+                projectile.transform.position = transform.position;
+                projectile.transform.eulerAngles = new Vector3(0, 0, angle);
+                if (direction == Facing.down)
+                {
+                    GetComponent<Animator>().Play("shoot_front");
+                }
+                else
+                {
+                    GetComponent<Animator>().Play("shoot_back");
+                }
             }
         }
 
