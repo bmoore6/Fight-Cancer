@@ -14,7 +14,7 @@ public class AllUnits : MonoBehaviour {
 
     // number of little pigs to be in the flock
     [SerializeField]
-    int numUnits = 10;
+    int numUnits = 100;
 
     // size of the flock (in screen space)
     [SerializeField]

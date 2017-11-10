@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   units: []
   unitPrefab: {fileID: 1706553439309696, guid: 08fb422ad7e7d924aa11e8d4a7c2fcb9, type: 2}
-  numUnits: 10
+  numUnits: 500
   range: {x: 5, y: 5, z: 5}
   seekGoal: 1
   obedient: 1
