@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
     // T-Cell firing noises
     public void TCellShoot()
     {
-
+        audioS.PlayOneShot(tCellShoot[Random.Range(0, tCellShoot.Length)]);
     }
 
     // OPTIONAL T-Cell walking sounds
