@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
             float angle = Mathf.Rad2Deg * rads;
             //transform.eulerAngles = new Vector3(0, 0, angle);
             //get shoot input
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 GameObject projectile = Instantiate(BulletPrefab);
                 projectile.transform.position = transform.position;
