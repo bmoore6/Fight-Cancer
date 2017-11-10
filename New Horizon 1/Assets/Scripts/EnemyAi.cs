@@ -26,7 +26,7 @@ public class EnemyAi : MonoBehaviour
 
     //count how many times the pig gets shot
     private int hitCounter = 0;
-    private int hitsBeforeDeath = 5;
+    private int hitsBeforeDeath = 25;
 
     //pig's current tree target
     GameObject treeTarget;
