@@ -6,7 +6,7 @@ public class AllUnits : MonoBehaviour {
 
     // all particles created for the flock
     [SerializeField]
-    public GameObject[] units;
+    public List<GameObject> units = new List<GameObject>();
 
     // prefab for the little pig
     [SerializeField]
@@ -39,14 +39,13 @@ public class AllUnits : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        units = new GameObject[numUnits];
         for (int i=0; i < numUnits; i++)
         {
             Vector3 unitPos = new Vector3(Random.Range(-range.x, range.x),
                 Random.Range(-range.y, range.y),
                 Random.Range(0, 0));
 
-            units[i] = Instantiate(unitPrefab, this.transform.position + unitPos, Quaternion.identity) as GameObject;
+            units.Add(Instantiate(unitPrefab, this.transform.position + unitPos, Quaternion.identity) as GameObject);
             units[i].GetComponent<Unit>().manager = this.gameObject;
         }
 		

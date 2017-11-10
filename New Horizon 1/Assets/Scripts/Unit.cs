@@ -161,12 +161,28 @@ public class Unit : MonoBehaviour {
             {
                 //destroy the pig!
                 Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+                RemoveSelfFromArray(); //Remove this instance from the Units[] array
                 Destroy(gameObject);
                 GameManager.win();
             }
 
             //destroy the bullet that collided with the pig
             Destroy(collision.gameObject);
+        }
+    }
+
+    void RemoveSelfFromArray()
+    {
+        int index = 0;
+        foreach (GameObject other in manager.GetComponent<AllUnits>().units)
+        {
+            if (other == this.gameObject)
+            {
+                manager.GetComponent<AllUnits>().units.RemoveAt(index);
+                // Debug.Log(manager.GetComponent<AllUnits>().units.Count);
+                break;
+            }
+            index++;
         }
     }
 
