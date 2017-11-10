@@ -22,10 +22,21 @@ public class SoundManager : MonoBehaviour
     // Background track declaration
     public AudioClip[] backgroundTrack = new AudioClip[1];
 
+    // Singleton
+    public static SoundManager SM = null;
+
     void Start()
     {
         // Audio source initialization
         audioS = GetComponent<AudioSource>();
+
+        // Singleton check
+        if (SM == null)
+            SM = this;
+        else if (SM != null)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Methods for calling the sounds
