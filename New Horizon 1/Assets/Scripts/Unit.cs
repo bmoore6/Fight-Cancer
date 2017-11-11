@@ -194,8 +194,11 @@ public class Unit : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        flock();
-        goalPos = UpdateGoalPos();
+        if (Time.timeScale > 0)
+        {
+            flock();
+            goalPos = UpdateGoalPos();
+        }
 	}
 
     Vector2 UpdateGoalPos()
