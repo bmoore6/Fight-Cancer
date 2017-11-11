@@ -28,6 +28,9 @@ public class Unit : MonoBehaviour {
     int hitCounter = 0;
     int hitsBeforeDeath = 2;
 
+    // this controls how agressively the little pigs move towards a target
+    float forceMultiplier = 700;
+
     // Use this for initialization
     void Start () {
 
@@ -50,7 +53,7 @@ public class Unit : MonoBehaviour {
             force = force.normalized;
             force *= manager.GetComponent<AllUnits>().maxforce;
         }
-        this.GetComponent<Rigidbody2D>().AddForce(force*700, ForceMode2D.Force);
+        this.GetComponent<Rigidbody2D>().AddForce(force*forceMultiplier, ForceMode2D.Force);
 
         if (this.GetComponent<Rigidbody2D>().velocity.magnitude > manager.GetComponent<AllUnits>().maxvelocity)
         {
