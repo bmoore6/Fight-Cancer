@@ -18,7 +18,7 @@ public class AllUnits : MonoBehaviour {
 
     // size of the flock (in screen space)
     [SerializeField]
-    Vector3 range = new Vector3(5, 5, 5);
+    Vector3 range = new Vector3(3, 3, 3);
 
     // these control the general behavior of ALL particles (little pigs)
     public bool seekGoal = true;
@@ -40,7 +40,7 @@ public class AllUnits : MonoBehaviour {
     GameObject[] trees;
 
     // Use this for initialization
-    void Start() {
+    void Start () {
 
         for (int i = 0; i < numUnits; i++)
         {

@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour {
     int hitsBeforeDeath = 2;
 
     // this controls how agressively the little pigs move towards a target
-    float forceMultiplier = 700;
+    float forceMultiplier = 800;
 
     // Use this for initialization
     void Start () {
