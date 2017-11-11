@@ -191,15 +191,19 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-
-        if (Time.timeScale > 0)
-        {
+    /// <summary>
+    /// Call flocking method. This happens in FixedUpdate because flock() contains calls to the physics engine
+    /// </summary>
+    void FixedUpdate () {
             flock();
-            goalPos = UpdateGoalPos();
-        }
 	}
+    /// <summary>
+    /// Update the target position for the unit....this will usually be trees
+    /// </summary>
+    private void Update()
+    {
+        goalPos = UpdateGoalPos();
+    } 
 
     Vector2 UpdateGoalPos()
     {
