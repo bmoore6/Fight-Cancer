@@ -36,6 +36,9 @@ public class Unit : MonoBehaviour {
 
         velocity = new Vector2(Random.Range(0.01f, 0.1f), Random.Range(0.01f, 0.1f));
         location = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+
+        // randomly select sorting layer. This will allow a little pig to either be in front of a tree, or behind a tree
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = Random.Range(3, 6);
 	}
 
     // works out the vector towards target location
