@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour {
     [SerializeField]
     public GameObject manager;
 
-    //exploding pig particle effect
+    // exploding pig particle effect
     [SerializeField]
     GameObject pigParticle;
 
@@ -24,17 +24,15 @@ public class Unit : MonoBehaviour {
     // force that's being applied to the little pig
     Vector2 currentForce;
 
-    //count how many times the little pig gets shot
-    private int hitCounter = 0;
-    private int hitsBeforeDeath = 2;
-
+    // count how many times the little pig gets shot
+    int hitCounter = 0;
+    int hitsBeforeDeath = 2;
 
     // Use this for initialization
     void Start () {
 
         velocity = new Vector2(Random.Range(0.01f, 0.1f), Random.Range(0.01f, 0.1f));
         location = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
-    		
 	}
 
     // works out the vector towards target location
@@ -52,7 +50,7 @@ public class Unit : MonoBehaviour {
             force = force.normalized;
             force *= manager.GetComponent<AllUnits>().maxforce;
         }
-        this.GetComponent<Rigidbody2D>().AddForce(force);
+        this.GetComponent<Rigidbody2D>().AddForce(force*700, ForceMode2D.Force);
 
         if (this.GetComponent<Rigidbody2D>().velocity.magnitude > manager.GetComponent<AllUnits>().maxvelocity)
         {
@@ -127,6 +125,7 @@ public class Unit : MonoBehaviour {
     {
         location = this.transform.position;
         velocity = this.GetComponent<Rigidbody2D>().velocity;
+        
 
         if (manager.GetComponent<AllUnits>().obedient && Random.Range (0,50) <= 1)
         {
@@ -190,6 +189,30 @@ public class Unit : MonoBehaviour {
     void Update () {
 
         flock();
-        goalPos = manager.transform.position;		
+        goalPos = UpdateGoalPos();
 	}
+
+    Vector2 UpdateGoalPos()
+    {
+        int index = 0;
+        int indexOfNearestTree = -1; // initialize to -1 in order to be sure that loop cycled properly
+        float distance = 1000f;
+
+        foreach (GameObject tree in manager.GetComponent<AllUnits>().GetTrees)
+        {
+            float distanceFromTree = Vector2.Distance(transform.position, tree.transform.position);
+            if (distanceFromTree < distance)
+            {
+                distance = distanceFromTree;
+                indexOfNearestTree = index;
+            }
+            index++;
+        }
+
+        if (indexOfNearestTree != -1)
+        {
+            return manager.GetComponent<AllUnits>().GetTrees[indexOfNearestTree].transform.position; // return the location of the nearest tree
+        }
+        else { return Vector2.zero; }
+    }
 }
