@@ -53,11 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   units: []
   unitPrefab: {fileID: 1706553439309696, guid: 08fb422ad7e7d924aa11e8d4a7c2fcb9, type: 2}
-  numUnits: 200
+  numUnits: 100
   range: {x: 5, y: 5, z: 5}
   seekGoal: 1
   obedient: 1
   willful: 0
-  neighborDistance: 50
+  neighborDistance: 25
   maxforce: 0.5
   maxvelocity: 2
