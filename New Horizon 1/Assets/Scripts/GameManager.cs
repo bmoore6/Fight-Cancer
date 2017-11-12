@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        
 	}
 	
 	// Update is called once per frame
@@ -113,6 +115,8 @@ public class GameManager : MonoBehaviour {
     private void goBackToMainMenu()
     {
         SceneManager.LoadScene("MainBody");
+        Time.timeScale = 1;
+        Destroy(gameObject);
     }
     
     /// <summary>
