@@ -28,6 +28,9 @@ public class Unit : MonoBehaviour {
     int hitCounter = 0;
     int hitsBeforeDeath = 2;
 
+    // % of health that a tree must have in order to be attacked by little pigs
+    float attractiveTreeHealth = .15f;
+
     // this controls how agressively the little pigs move towards a target
     float forceMultiplier = 800;
 
@@ -214,7 +217,7 @@ public class Unit : MonoBehaviour {
         foreach (GameObject tree in manager.GetComponent<AllUnits>().GetTrees)
         {
             float distanceFromTree = Vector2.Distance(transform.position, tree.transform.position);
-            if (distanceFromTree < distance && tree.GetComponent<TreeScript>().Health > .05) // check for nearer distance and tree with health greater than 5%
+            if (distanceFromTree < distance && tree.GetComponent<TreeScript>().Health > attractiveTreeHealth) // check for nearer distance and tree with health greater than 5%
             {
                 distance = distanceFromTree;
                 indexOfNearestTree = index;
