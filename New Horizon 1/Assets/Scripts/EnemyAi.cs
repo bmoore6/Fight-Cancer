@@ -18,6 +18,10 @@ public class EnemyAi : MonoBehaviour
     [SerializeField]
     Sprite LeftSprite;
 
+    // flock of pigs that the big pig can spawn
+    [SerializeField]
+    GameObject flockOpigs;
+
     Rigidbody2D rb2d;
 
     float speed = 40f;
@@ -124,6 +128,7 @@ public class EnemyAi : MonoBehaviour
             {
                 //destroy the pig!
                 Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+                Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 GameManager.win();
             }

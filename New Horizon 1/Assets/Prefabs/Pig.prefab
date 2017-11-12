@@ -104,6 +104,7 @@ MonoBehaviour:
   FrontSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
   BackSprite: {fileID: 21300000, guid: 4392fe2e50a1a58438f8026bdb158494, type: 3}
   LeftSprite: {fileID: 21300000, guid: 7cb973a1b78edd44b9c56e761ed75f0d, type: 3}
+  flockOpigs: {fileID: 1824883753049432, guid: ca7173bd04baa5448887285b1e1325a6, type: 2}
   pigState: 0
 --- !u!212 &212576294761369578
 SpriteRenderer:
