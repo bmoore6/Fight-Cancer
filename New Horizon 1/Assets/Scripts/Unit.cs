@@ -214,7 +214,7 @@ public class Unit : MonoBehaviour {
         foreach (GameObject tree in manager.GetComponent<AllUnits>().GetTrees)
         {
             float distanceFromTree = Vector2.Distance(transform.position, tree.transform.position);
-            if (distanceFromTree < distance)
+            if (distanceFromTree < distance && tree.GetComponent<TreeScript>().Health > .05) // check for nearer distance and tree with health greater than 5%
             {
                 distance = distanceFromTree;
                 indexOfNearestTree = index;
