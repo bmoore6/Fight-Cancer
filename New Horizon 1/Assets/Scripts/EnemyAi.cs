@@ -130,7 +130,7 @@ public class EnemyAi : MonoBehaviour
                 Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
                 Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
-                GameManager.win();
+                GameManager.GM.win();
             }
 
             //destroy the bullet that collided with the pig
