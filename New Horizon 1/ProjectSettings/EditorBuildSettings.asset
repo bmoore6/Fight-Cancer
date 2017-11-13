@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lungs.unity
     guid: 514174979d6a95b48a80958204cef10b
+  - enabled: 1
+    path: Assets/Scenes/WinScn.unity
+    guid: c57e9b903a001a14d8a2c9d3f405abaa
+  - enabled: 1
+    path: Assets/Scenes/LoseScn.unity
+    guid: 2ae93caa363088d47882434abc5c99c6
