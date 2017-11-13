@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
+    private enum Facing { down, up };
+
     //exploding pig particle effect
     [SerializeField]
     GameObject pigParticle;
 
     //assign sprites
     [SerializeField]
-    Sprite FrontSprite;
+    GameObject frontSprites;
 
     [SerializeField]
-    Sprite BackSprite;
-
-    [SerializeField]
-    Sprite LeftSprite;
+    GameObject backSprites;
 
     // flock of pigs that the big pig can spawn
     [SerializeField]
@@ -26,11 +25,12 @@ public class EnemyAi : MonoBehaviour
 
     float speed = 40f;
 
-    SpriteRenderer sr;
-
     //count how many times the pig gets shot
     private int hitCounter = 0;
     private int hitsBeforeDeath = 25;
+
+    private Animator anim;
+    private Facing directionFacing;
 
     //pig's current tree target
     GameObject treeTarget;
@@ -49,11 +49,12 @@ public class EnemyAi : MonoBehaviour
     {
 
         rb2d = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         rb2d.freezeRotation = true;
         pigState = State.wandering;
+        directionFacing = Facing.down;
         direction = new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, 0).normalized;
         moveAwayTime = 0;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -71,41 +72,61 @@ public class EnemyAi : MonoBehaviour
         //moving down left
         if (x <= 0 && y <= 0)
         {
-            sr.flipX = false;
-            sr.sprite = FrontSprite;
+            transform.localScale = new Vector3(-3f, 3f, 1f);
         }
         //moving down right
         else if (x >= 0 && y <= 0)
         {
-            sr.flipX = true;
-            sr.sprite = FrontSprite;
+            transform.localScale = new Vector3(3f, 3f, 1f);
         }
         //moving up left
         else if (x <= 0 && y >= 0)
         {
-            sr.flipX = false;
-            sr.sprite = BackSprite;
+            transform.localScale = new Vector3(-3f, 3f, 1f);
         }
         //moving up right
         else if (x >= 0 && y >= 0)
         {
-            sr.flipX = true;
-            sr.sprite = BackSprite;
+            transform.localScale = new Vector3(3f, 3f, 1f);
         }
+
+        if(directionFacing == Facing.down)
+        {
+            frontSprites.SetActive(true);
+            backSprites.SetActive(false);
+        }
+
         if (pigState == State.still)
         {
             direction = (treeTarget.transform.position - gameObject.transform.position).normalized;
+            if(directionFacing == Facing.down)
+            {
+                anim.Play("idle_front");
+            }
+            else
+            {
+                anim.Play("idle_back");
+            }
         }
       
         // move in that direction if not still
         //transform.Translate(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime * speed);
         rb2d.MovePosition(transform.position + direction * speed * Time.deltaTime);
 
-
         //testing merge
         //set previous position to current
-        if(pigState!=State.still)
-        prevPosition = gameObject.transform.position;
+        if (pigState != State.still)
+        {
+            prevPosition = gameObject.transform.position;
+            if(directionFacing == Facing.down)
+            {
+                anim.Play("walk_front");
+            }
+            else
+            {
+                anim.Play("walk_back");
+            }
+        }
     }
     private void FixedUpdate()
     {
