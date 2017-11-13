@@ -174,7 +174,7 @@ public class Unit : MonoBehaviour {
                 Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
                 RemoveSelfFromArray(); //Remove this instance from the Units[] array
                 Destroy(gameObject);
-                GameManager.win();
+                GameManager.GM.win();
             }
 
             //destroy the bullet that collided with the pig

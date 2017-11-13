@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     private Facing direction;
 
-
+    private Animator anim;
 
     // Use this for initialization
     void Start()
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
         backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
         backSprites.SetActive(false);
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -105,11 +106,11 @@ public class Player : MonoBehaviour
                 projectile.transform.eulerAngles = new Vector3(0, 0, angle);
                 if (direction == Facing.down)
                 {
-                    GetComponent<Animator>().Play("shoot_front");
+                    anim.Play("shoot_front");
                 }
                 else
                 {
-                    GetComponent<Animator>().Play("shoot_back");
+                    anim.Play("shoot_back");
                 }
             }
         }
@@ -120,11 +121,11 @@ public class Player : MonoBehaviour
         {
             if(direction == Facing.down)
             {
-                GetComponent<Animator>().Play("idle_front");
+                anim.Play("idle_front");
             }
             else
             {
-                GetComponent<Animator>().Play("idle_back");
+                anim.Play("idle_back");
             }
         }
 
@@ -132,11 +133,11 @@ public class Player : MonoBehaviour
         {
             if(direction == Facing.down)
             {
-                GetComponent<Animator>().Play("walk_front");
+                anim.Play("walk_front");
             }
             else
             {
-                GetComponent<Animator>().Play("walk_back");
+                anim.Play("walk_back");
             }
         }
 

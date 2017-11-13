@@ -21,4 +21,16 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("Help");
     }
+
+    //go back to menu
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("MainBody");
+    }
+
+    //go back to menu
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+    }
 }

@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
         //loss condition
         if (percentHealth < minHealth)
         {
-
+            lose();
         }
 
         // Listen for pause key, pauses upon press.
@@ -70,15 +70,17 @@ public class GameManager : MonoBehaviour {
             pause();
         }
 	}
-    public static void win()
+    public void win()
     {
-        if (GameObject.FindGameObjectsWithTag("Pig").GetLength(0) <= 0)
+        if (GameObject.FindGameObjectsWithTag("Pig").GetLength(0)+ GameObject.FindGameObjectsWithTag("littlePig").GetLength(0) <= 0)
         {
+            Destroy(gameObject);
             SceneManager.LoadScene("WinScn");
         }
     }
     public void lose()
     {
+        Destroy(gameObject);
         SceneManager.LoadScene("LoseScn");
     }
 
