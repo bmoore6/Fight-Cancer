@@ -34,6 +34,9 @@ public class Unit : MonoBehaviour {
     // this controls how agressively the little pigs move towards a target
     float forceMultiplier = 800;
 
+    // the amount of damage that the little pigs inflict on the trees
+    float damageAmount = .00001f;
+
     // Use this for initialization
     void Start () {
 
@@ -194,6 +197,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
+
     /// <summary>
     /// Call flocking method. This happens in FixedUpdate because flock() contains calls to the physics engine
     /// </summary>
@@ -206,6 +210,7 @@ public class Unit : MonoBehaviour {
     private void Update()
     {
         goalPos = UpdateGoalPos();
+        if (Vector2.Distance((Vector2) this.transform.position, UpdateGoalPos()) < 5) { DamageTrees(); }
     } 
 
     Vector2 UpdateGoalPos()
@@ -231,4 +236,29 @@ public class Unit : MonoBehaviour {
         }
         else { return Vector2.zero; }
     }
+
+    void DamageTrees()
+    {
+        int index = 0;
+        int indexOfNearestTree = -1; // initialize to -1 in order to be sure that loop cycled properly
+        float distance = 1000f;
+
+        foreach (GameObject tree in manager.GetComponent<AllUnits>().GetTrees)
+        {
+            float distanceFromTree = Vector2.Distance(transform.position, tree.transform.position);
+            if (distanceFromTree < distance && tree.GetComponent<TreeScript>().Health > attractiveTreeHealth) // check for nearer distance and tree with health greater than 5%
+            {
+                distance = distanceFromTree;
+                indexOfNearestTree = index;
+            }
+            index++;
+        }
+
+        if (indexOfNearestTree != -1)
+        {
+            GameObject treeToDamage = manager.GetComponent<AllUnits>().GetTrees[indexOfNearestTree];
+            treeToDamage.GetComponent<TreeScript>().Health -= damageAmount;
+        }
+    }
+
 }
