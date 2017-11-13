@@ -13,6 +13,9 @@ public class TreeScript : MonoBehaviour {
     [SerializeField]
     float damage=.0001f;
 
+    [SerializeField]
+    float regen = .0001f;
+
     // Health of each tree must be between 0 and 1
     float health = 1;
 
@@ -62,6 +65,10 @@ public class TreeScript : MonoBehaviour {
         if (collision.gameObject.tag == "Pig"&&health>0)
         {
             this.Health -= damage;
+        }
+        else if (health < 1)
+        {
+            this.Health += regen;
         }
     }
 }

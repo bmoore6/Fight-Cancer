@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2eb051dcd0f65d043a2ba772a1ec19e2
-timeCreated: 1508724040
+timeCreated: 1510452011
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -10,6 +10,8 @@ MonoImporter:
   - FrontSprite: {instanceID: 0}
   - BackSprite: {instanceID: 0}
   - LeftSprite: {instanceID: 0}
+  - flockOpigs: {fileID: 1824883753049432, guid: ca7173bd04baa5448887285b1e1325a6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
