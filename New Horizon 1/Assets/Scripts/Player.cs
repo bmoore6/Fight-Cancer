@@ -94,8 +94,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0) && GameManager.GM.isPause() == false) { FireCytoBeam(); }
 
-            // Animation Logic
-            if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+        // Animation Logic
+        if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
         {
             if(direction == Facing.down)
             {
@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void FireCytoBeam()
     {
+
         // calculate current beam origin
         Vector2 beamOrigin = CalculateBeamOrigin();
 
@@ -179,11 +180,19 @@ public class Player : MonoBehaviour
             //set endpoint of the line equal to the point of impact
             mousePos = hit.point;
         }
+
+
+
         // render a cytotoxin beam
         GameObject cytoBeam = Instantiate(beamPrefab);
         Vector3[] beamPos = new Vector3[2];
         beamPos[0] = beamOrigin; //point at which the line begins
         beamPos[1] = mousePos; //point at while the line ends
+
+        //face character in direction of beam
+        FaceCharacterInBeamDirection(beamPos);
+
+        // Set beam start and end points--->Render beam to screen
         cytoBeam.GetComponent<LineRenderer>().SetPositions(beamPos);
 
         //if (direction == Facing.down)
@@ -194,5 +203,38 @@ public class Player : MonoBehaviour
         //{
         //    anim.Play("shoot_back");
         //}       
+    }
+    /// <summary>
+    /// This method forces the player character to face the direction of the beam
+    /// </summary>
+    /// <param name="beam"></param>
+    void FaceCharacterInBeamDirection(Vector3[] beam)
+    {
+        if (beam[0].y >= beam[1].y)
+        {
+            //assign sprite front
+            frontSprites.SetActive(true);
+            backSprites.SetActive(false);
+            direction = Facing.down;
+        }
+        if (beam[0].y < beam[1].y)
+        {
+            //assigns sprite back
+            frontSprites.SetActive(false);
+            backSprites.SetActive(true);
+            direction = Facing.up;
+        }
+        if (beam[0].x >= beam[1].x)
+        {
+            frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+            backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        if (beam[0].x < beam[1].x)
+        {
+            frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+            backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+ 
+
     }
 }

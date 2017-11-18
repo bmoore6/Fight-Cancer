@@ -2290,6 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b091d9756b0445740ba29ed65d5a3146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallSplash: {fileID: 0}
   beamPrefab: {fileID: 0}
   frontSprites: {fileID: 1167223621678754}
   backSprites: {fileID: 1568910275515300}
