@@ -178,7 +178,9 @@ public class Unit : MonoBehaviour {
             GameManager.GM.win();
         }
     }
-
+    /// <summary>
+    /// This method removes this littlepig from the unit array
+    /// </summary>
     void RemoveSelfFromArray()
     {
         int index = 0;
@@ -193,8 +195,6 @@ public class Unit : MonoBehaviour {
             index++;
         }
     }
-
-
     /// <summary>
     /// Call flocking method. This happens in FixedUpdate because flock() contains calls to the physics engine
     /// </summary>
@@ -243,6 +243,8 @@ public class Unit : MonoBehaviour {
         int indexOfNearestTree = -1; // initialize to -1 in order to be sure that loop cycled properly
         float distance = 1000f;
 
+
+        //iterate through tree array to find the tree that is currently being attacked
         foreach (GameObject tree in manager.GetComponent<AllUnits>().GetTrees)
         {
             float distanceFromTree = Vector2.Distance(transform.position, tree.transform.position);
@@ -253,12 +255,10 @@ public class Unit : MonoBehaviour {
             }
             index++;
         }
-
         if (indexOfNearestTree != -1)
         {
             GameObject treeToDamage = manager.GetComponent<AllUnits>().GetTrees[indexOfNearestTree];
             treeToDamage.GetComponent<TreeScript>().Health -= damageAmount;
         }
     }
-
 }

@@ -40,11 +40,11 @@ public class Player : MonoBehaviour
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        direction = Facing.down;
-        frontSprites.SetActive(true);
-        frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-        backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
-        backSprites.SetActive(false);
+
+        //initialize character orientation
+        SetCharacterFrontFacing();
+        SetCharacterRightFacing();
+
         anim = GetComponent<Animator>();
     }
 
@@ -56,17 +56,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Vertical") < 0)
             {
-                //assign sprite front
-                frontSprites.SetActive(true);
-                backSprites.SetActive(false);
-                direction = Facing.down;
+                SetCharacterFrontFacing();
             }
             else
             {
-                //assigns sprite back
-                frontSprites.SetActive(false);
-                backSprites.SetActive(true);
-                direction = Facing.up;
+                SetCharacterRearFacing();
             }
 
             //Moves Forward and back along y axis  
@@ -78,13 +72,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-                backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+                SetCharacterRightFacing();
             }
             else
             {
-                frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
-                backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+                SetCharacterLeftFacing();
             }
             //Moves Left and right along x Axis  
             rb2d.MovePosition(transform.position + Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
@@ -92,6 +84,7 @@ public class Player : MonoBehaviour
 
         rb2d.MovePosition(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * moveSpeed * Time.deltaTime);
 
+        //check if player if holding left mouse button, if so then fire cytotoxin beam
         if (Input.GetMouseButton(0) && GameManager.GM.isPause() == false) { FireCytoBeam(); }
 
         // Animation Logic
@@ -106,7 +99,6 @@ public class Player : MonoBehaviour
                 anim.Play("idle_back");
             }
         }
-
         if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)
         {
             if(direction == Facing.down)
@@ -116,9 +108,8 @@ public class Player : MonoBehaviour
             else
             {
                 anim.Play("walk_back");
-            }
+           }
         }
-
     }
 
     // check for collision with wall
@@ -148,7 +139,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void FireCytoBeam()
     {
-
         // calculate current beam origin
         Vector2 beamOrigin = CalculateBeamOrigin();
 
@@ -181,8 +171,6 @@ public class Player : MonoBehaviour
             mousePos = hit.point;
         }
 
-
-
         // render a cytotoxin beam
         GameObject cytoBeam = Instantiate(beamPrefab);
         Vector3[] beamPos = new Vector3[2];
@@ -212,29 +200,42 @@ public class Player : MonoBehaviour
     {
         if (beam[0].y >= beam[1].y)
         {
-            //assign sprite front
-            frontSprites.SetActive(true);
-            backSprites.SetActive(false);
-            direction = Facing.down;
+            SetCharacterFrontFacing();
         }
-        if (beam[0].y < beam[1].y)
-        {
-            //assigns sprite back
-            frontSprites.SetActive(false);
-            backSprites.SetActive(true);
-            direction = Facing.up;
-        }
+        else { SetCharacterRearFacing(); }
+
         if (beam[0].x >= beam[1].x)
         {
-            frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-            backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+            SetCharacterRightFacing();
         }
-        if (beam[0].x < beam[1].x)
-        {
-            frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
-            backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
- 
+        else { SetCharacterLeftFacing(); }
+    }
 
+    /// <summary>
+    /// Note: Method names are self-explanatory
+    /// </summary>
+    void SetCharacterFrontFacing()
+    {
+        //assign sprite front
+        frontSprites.SetActive(true);
+        backSprites.SetActive(false);
+        direction = Facing.down;
+    }
+    void SetCharacterRearFacing()
+    {
+        //assigns sprite back
+        frontSprites.SetActive(false);
+        backSprites.SetActive(true);
+        direction = Facing.up;
+    }
+    void SetCharacterRightFacing()
+    {
+        frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+        backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+    void SetCharacterLeftFacing()
+    {
+        frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+        backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
