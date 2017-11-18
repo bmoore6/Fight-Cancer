@@ -51,8 +51,15 @@ public class EnemyAi : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
         pigState = State.wandering;
-        directionFacing = Facing.down;
         direction = new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, 0).normalized;
+        if(direction.y <= 0)
+        {
+            directionFacing = Facing.down;
+        }
+        else
+        {
+            directionFacing = Facing.up;
+        }
         moveAwayTime = 0;
         anim = GetComponent<Animator>();
     }
@@ -70,24 +77,28 @@ public class EnemyAi : MonoBehaviour
         float y = Mathf.Sin(rads);
 
         //moving down left
-        if (x <= 0 && y <= 0)
+        if (x < 0 && y < 0)
         {
-            transform.localScale = new Vector3(-3f, 3f, 1f);
+            transform.localScale = new Vector3(3f, 3f, 1f);
+            directionFacing = Facing.up;
         }
         //moving down right
-        else if (x >= 0 && y <= 0)
-        {
-            transform.localScale = new Vector3(3f, 3f, 1f);
-        }
-        //moving up left
-        else if (x <= 0 && y >= 0)
+        else if (x > 0 && y < 0)
         {
             transform.localScale = new Vector3(-3f, 3f, 1f);
+            directionFacing = Facing.up;
+        }
+        //moving up left
+        else if (x < 0 && y > 0)
+        {
+            transform.localScale = new Vector3(-3f, 3f, 1f);
+            directionFacing = Facing.down;
         }
         //moving up right
-        else if (x >= 0 && y >= 0)
+        else if (x > 0 && y > 0)
         {
             transform.localScale = new Vector3(3f, 3f, 1f);
+            directionFacing = Facing.down;
         }
 
         if(directionFacing == Facing.down)
@@ -95,10 +106,23 @@ public class EnemyAi : MonoBehaviour
             frontSprites.SetActive(true);
             backSprites.SetActive(false);
         }
+        else
+        {
+            frontSprites.SetActive(false);
+            backSprites.SetActive(true);
+        }
 
         if (pigState == State.still)
         {
             direction = (treeTarget.transform.position - gameObject.transform.position).normalized;
+            if(direction.y < 0)
+            {
+                directionFacing = Facing.up;
+            }
+            else
+            {
+                directionFacing = Facing.down;
+            }
             if(directionFacing == Facing.down)
             {
                 anim.Play("idle_front");
