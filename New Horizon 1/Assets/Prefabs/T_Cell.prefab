@@ -2290,8 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b091d9756b0445740ba29ed65d5a3146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 1311370920955168, guid: 727398dc19de41449bd287374eab7e91,
-    type: 2}
+  beamPrefab: {fileID: 0}
   frontSprites: {fileID: 1167223621678754}
   backSprites: {fileID: 1568910275515300}
   moveSpeed: 3

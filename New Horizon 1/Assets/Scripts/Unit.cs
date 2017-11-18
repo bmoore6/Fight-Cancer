@@ -163,22 +163,19 @@ public class Unit : MonoBehaviour {
         applyForce(currentForce);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Adds damage to the little pig
+    /// </summary>
+    public void AddDamage()
     {
-        if (collision.gameObject.tag == "bullet")
+        hitCounter += 1;
+        if (hitCounter >= hitsBeforeDeath)
         {
-            hitCounter += 1;
-            if (hitCounter >= hitsBeforeDeath)
-            {
-                //destroy the pig!
-                Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
-                RemoveSelfFromArray(); //Remove this instance from the Units[] array
-                Destroy(gameObject);
-                GameManager.GM.win();
-            }
-
-            //destroy the bullet that collided with the pig
-            Destroy(collision.gameObject);
+            //destroy the pig!
+            Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+            RemoveSelfFromArray(); //Remove this instance from the Units[] array
+            Destroy(gameObject);
+            GameManager.GM.win();
         }
     }
 
@@ -236,7 +233,10 @@ public class Unit : MonoBehaviour {
         }
         else { return Vector2.zero; }
     }
-
+    
+    /// <summary>
+    /// ***Redundant code, will need to rework this method to be more efficient****
+    /// </summary>
     void DamageTrees()
     {
         int index = 0;

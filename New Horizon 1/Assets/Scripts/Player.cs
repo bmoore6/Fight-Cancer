@@ -8,7 +8,10 @@ public class Player : MonoBehaviour
     private enum Facing { down, up };
 
     [SerializeField]
-    GameObject BulletPrefab;
+    GameObject wallSplash;
+
+    [SerializeField]
+    GameObject beamPrefab;
 
     [SerializeField]
     GameObject frontSprites;
@@ -89,35 +92,10 @@ public class Player : MonoBehaviour
 
         rb2d.MovePosition(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * moveSpeed * Time.deltaTime);
 
-        //calculate angle to shoot bullet at
-        if (GameManager.GM.isPause() == false)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float deltaX = mousePosition.x - transform.position.x;
-            float deltaY = mousePosition.y - transform.position.y;
-            float rads = Mathf.Atan2(deltaY, deltaX);
-            float angle = Mathf.Rad2Deg * rads;
-            //transform.eulerAngles = new Vector3(0, 0, angle);
-            //get shoot input
-            if (Input.GetMouseButton(0))
-            {
-                GameObject projectile = Instantiate(BulletPrefab);
-                projectile.transform.position = transform.position;
-                projectile.transform.eulerAngles = new Vector3(0, 0, angle);
-                if (direction == Facing.down)
-                {
-                    anim.Play("shoot_front");
-                }
-                else
-                {
-                    anim.Play("shoot_back");
-                }
-            }
-        }
+        if (Input.GetMouseButton(0) && GameManager.GM.isPause() == false) { FireCytoBeam(); }
 
-        // Animation Logic
-
-        if(Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+            // Animation Logic
+            if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
         {
             if(direction == Facing.down)
             {
@@ -144,7 +122,7 @@ public class Player : MonoBehaviour
     }
 
     // check for collision with wall
-    void OnCollisionEnter2D(Collision2D coll)
+   void OnCollisionEnter2D(Collision2D coll)
     {
 
         // if colliding with wall and moving vertically move back
@@ -152,5 +130,69 @@ public class Player : MonoBehaviour
         {
             rb2d.velocity = Vector3.zero;
         }
+    }
+
+    /// <summary>
+    /// Get the origin of the CytoBeam. This will require some tweaking later
+    /// </summary>
+    /// <returns></returns>
+    Vector2 CalculateBeamOrigin() {
+
+        Vector2 currentPlayerPosition = transform.position;
+        //currentPlayerPosition.y += 3;
+        return currentPlayerPosition;
+    }
+
+    /// <summary>
+    /// Handles player firing cytoToxin beam
+    /// </summary>
+    void FireCytoBeam()
+    {
+        // calculate current beam origin
+        Vector2 beamOrigin = CalculateBeamOrigin();
+
+        // current mouse cursor position. Typecasting to Vector2.
+        Vector2 mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // calculate direction from player to mouse cursor
+        Vector2 beamDirection = mousePos - beamOrigin;
+
+        // Use the magnitude of beamDirection to set max distance parameter of RayCast2D
+        float maxDistance = beamDirection.magnitude;
+        beamDirection.Normalize();
+
+        // Raycast2D hit will give us information about other colliders 
+        RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamDirection, maxDistance, LayerMask.GetMask("littlePig", "pig", "wall"));
+
+        //// check for collisions
+        if (hit.collider != null)
+        {
+            //kill little pigs
+            if (hit.collider.tag == "littlePig") { hit.collider.gameObject.GetComponent<Unit>().AddDamage(); }
+
+            //kill big pigs
+            else if (hit.collider.tag == "Pig") { hit.collider.gameObject.GetComponent<EnemyAi>().AddDamage(); }
+
+            //Cytotoxin beam hitting wall....create a splash
+            else { Instantiate(wallSplash, hit.point, Quaternion.identity); }
+
+            //set endpoint of the line equal to the point of impact
+            mousePos = hit.point;
+        }
+        // render a cytotoxin beam
+        GameObject cytoBeam = Instantiate(beamPrefab);
+        Vector3[] beamPos = new Vector3[2];
+        beamPos[0] = beamOrigin; //point at which the line begins
+        beamPos[1] = mousePos; //point at while the line ends
+        cytoBeam.GetComponent<LineRenderer>().SetPositions(beamPos);
+
+        //if (direction == Facing.down)
+        //{
+        //    anim.Play("shoot_front");
+        //}
+        //else
+        //{
+        //    anim.Play("shoot_back");
+        //}       
     }
 }

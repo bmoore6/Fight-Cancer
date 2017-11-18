@@ -26,8 +26,8 @@ public class EnemyAi : MonoBehaviour
     float speed = 40f;
 
     //count how many times the pig gets shot
-    private int hitCounter = 0;
-    private int hitsBeforeDeath = 25;
+    int hitCounter = 0;
+    int hitsBeforeDeath = 25;
 
     private Animator anim;
     private Facing directionFacing;
@@ -140,24 +140,26 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Damage the pig
+    /// </summary>
+    public void AddDamage()
     {
-        if (collision.gameObject.tag == "bullet")
+        hitCounter += 1;
+        if (hitCounter >= hitsBeforeDeath)
         {
-            hitCounter += 1;
-            if (hitCounter >= hitsBeforeDeath)
-            {
-                //destroy the pig!
-                Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
-                Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject);
-                GameManager.GM.win();
-            }
-
-            //destroy the bullet that collided with the pig
-            Destroy(collision.gameObject);
+            //destroy the pig!
+            Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+            Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            GameManager.GM.win();
         }
-        else if (collision.gameObject.tag != "tree"||collision.gameObject.GetComponent<TreeScript>().Health<.05f)
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {       
+        if (collision.gameObject.tag != "tree"||collision.gameObject.GetComponent<TreeScript>().Health<.05f)
         {
             direction = direction * -1;
             moveAwayTime = 3;
