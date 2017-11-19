@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
 	}
     public void win()
     {
-        Debug.Log(GameObject.FindGameObjectsWithTag("Pig").GetLength(0) + GameObject.FindGameObjectsWithTag("littlePig").GetLength(0));
+        //Debug.Log(GameObject.FindGameObjectsWithTag("Pig").GetLength(0) + GameObject.FindGameObjectsWithTag("littlePig").GetLength(0));
         if (GameObject.FindGameObjectsWithTag("Pig").GetLength(0)+ GameObject.FindGameObjectsWithTag("littlePig").GetLength(0) <= maxEmenies+1)
         {
             Destroy(gameObject);

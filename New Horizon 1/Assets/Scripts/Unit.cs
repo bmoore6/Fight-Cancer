@@ -189,7 +189,6 @@ public class Unit : MonoBehaviour {
             if (other == this.gameObject)
             {
                 manager.GetComponent<AllUnits>().units.RemoveAt(index);
-                // Debug.Log(manager.GetComponent<AllUnits>().units.Count);
                 break;
             }
             index++;
