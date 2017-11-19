@@ -21,9 +21,11 @@ public class TreeScript : MonoBehaviour {
 
     Renderer rend;
     Vector4 permColor;
+    int regenTimer;
+    bool collActive=true;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         // Randomly select which sprite to use        
         GetComponent<SpriteRenderer>().sprite = trees[Random.Range(0, trees.Length)];
@@ -33,6 +35,41 @@ public class TreeScript : MonoBehaviour {
         rend = GetComponent<Renderer>();
         rend.material.shader = Shader.Find("2D/Texture Color Alpha");
         permColor = rend.material.GetColor("_Color");
+    }
+
+    private void Update()
+    {
+        if (Health > .15 && Health < 1)
+        {
+            Health += regen;
+        }
+        if (collActive==false)
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+        if (Health<.15&&collActive==true)
+        {
+            collActive = false;
+            regenTimer = 500;
+        }
+    }
+
+    //timer
+    private void FixedUpdate()
+    {
+        if (regenTimer > 0)
+        {
+            regenTimer--;
+        }
+        if (regenTimer == 1)
+        {
+            Health = .16f;
+            collActive = true;
+        }
     }
 
     /// <summary>

@@ -7,10 +7,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject healthBar;
-    [SerializeField]
-    float minHealth=.2f;
     GameObject[] trees;
     float percentHealth;
+
+    //lose condition minimum health
+    [SerializeField]
+    float minHealth=.2f;
+
+    //maximum enemies left that you are allowed to win with
+    [SerializeField]
+    int maxEmenies = 0;
 
     //pause menu
     [SerializeField]
@@ -72,7 +78,8 @@ public class GameManager : MonoBehaviour {
 	}
     public void win()
     {
-        if (GameObject.FindGameObjectsWithTag("Pig").GetLength(0)+ GameObject.FindGameObjectsWithTag("littlePig").GetLength(0) <= 0)
+        Debug.Log(GameObject.FindGameObjectsWithTag("Pig").GetLength(0) + GameObject.FindGameObjectsWithTag("littlePig").GetLength(0));
+        if (GameObject.FindGameObjectsWithTag("Pig").GetLength(0)+ GameObject.FindGameObjectsWithTag("littlePig").GetLength(0) <= maxEmenies+1)
         {
             Destroy(gameObject);
             SceneManager.LoadScene("WinScn");
