@@ -47,7 +47,6 @@ public class EnemyAi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
         pigState = State.wandering;
@@ -114,8 +113,8 @@ public class EnemyAi : MonoBehaviour
 
         if (pigState == State.still)
         {
-            direction = (treeTarget.transform.position - gameObject.transform.position).normalized;
-            if(direction.y < 0)
+            rb2d.MovePosition(transform.position + direction * speed/10 * Time.deltaTime);
+            if (direction.y < 0)
             {
                 directionFacing = Facing.up;
             }
@@ -132,10 +131,6 @@ public class EnemyAi : MonoBehaviour
                 anim.Play("idle_back");
             }
         }
-      
-        // move in that direction if not still
-        //transform.Translate(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime * speed);
-        rb2d.MovePosition(transform.position + direction * speed * Time.deltaTime);
 
         //testing merge
         //set previous position to current
@@ -150,6 +145,9 @@ public class EnemyAi : MonoBehaviour
             {
                 anim.Play("walk_back");
             }
+            // move in that direction if not still
+            //transform.Translate(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime * speed);
+            rb2d.MovePosition(transform.position + direction * speed * Time.deltaTime);
         }
     }
     private void FixedUpdate()
@@ -175,15 +173,15 @@ public class EnemyAi : MonoBehaviour
             //destroy the pig!
             Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
             Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
-            Destroy(gameObject);
             GameManager.GM.win();
+            Destroy(gameObject);
         }
 
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {       
-        if (collision.gameObject.tag != "tree"||collision.gameObject.GetComponent<TreeScript>().Health<.05f)
+        if (collision.gameObject.tag != "tree"||collision.gameObject.GetComponent<TreeScript>().Health<.15f)
         {
             direction = direction * -1;
             moveAwayTime = 3;
@@ -194,16 +192,24 @@ public class EnemyAi : MonoBehaviour
             pigState = State.still;
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.collider.tag == "tree" && collision.gameObject.GetComponent<TreeScript>().Health <= 0)
+        if (collision.gameObject.tag == "tree")
         {
             MoveOn();
         }
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "tree" && collision.gameObject.GetComponent<TreeScript>().Health <= .15)
+        {
+            MoveOn();
+        }
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "tree"&&collision.gameObject.GetComponent<TreeScript>().Health > .05f)
+        if (collision.tag == "tree"&&collision.gameObject.GetComponent<TreeScript>().Health > .15f&&pigState==State.wandering)
         {
             treeTarget = collision.gameObject;
             pigState = State.attackTree;
@@ -212,10 +218,11 @@ public class EnemyAi : MonoBehaviour
     }
     public void MoveOn()
     {
+        treeTarget = null;
         gameObject.transform.position = prevPosition;
         pigState = State.wandering;
         direction = direction * -1;
-        moveAwayTime = 3;
+        moveAwayTime = 2;
     }
 }
 	

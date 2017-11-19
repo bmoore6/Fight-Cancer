@@ -172,10 +172,10 @@ public class Unit : MonoBehaviour {
         if (hitCounter >= hitsBeforeDeath)
         {
             //destroy the pig!
+            GameManager.GM.win();
             Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
             RemoveSelfFromArray(); //Remove this instance from the Units[] array
             Destroy(gameObject);
-            GameManager.GM.win();
         }
     }
     /// <summary>
