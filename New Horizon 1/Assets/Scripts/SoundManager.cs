@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] backgroundTrack = new AudioClip[1];
 
     // Singleton
-    public static SoundManager SM = null;
+    //public static SoundManager SM = null;
 
     void Start()
     {
@@ -31,12 +31,12 @@ public class SoundManager : MonoBehaviour
         audioS = GetComponent<AudioSource>();
 
         // Singleton check
-        if (SM == null)
-            SM = this;
-        else if (SM != null)
-            Destroy(gameObject);
+        //if (SM == null)
+        //    SM = this;
+        //else if (SM != null)
+        //    Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     // Methods for calling the sounds
@@ -57,7 +57,7 @@ public class SoundManager : MonoBehaviour
     // Bullet despawn (hit) noises
     public void CytotoxinSplash()
     {
-
+        audioS.PlayOneShot(cytotoxinSplash[Random.Range(0, cytotoxinSplash.Length)]);
     }
 
     // Cancer Pigs hitting the aveola
@@ -81,7 +81,7 @@ public class SoundManager : MonoBehaviour
     // Background music method
     public void BackgroundTrack()
     {
-        
+        audioS.PlayOneShot(backgroundTrack[0]);
     }
     #endregion
 }

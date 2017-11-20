@@ -35,6 +35,11 @@ public class Player : MonoBehaviour
 
     private Animator anim;
 
+    // temporary workaround for setting up sounds
+    SoundManager sounds;
+    private float shootSoundTimerMax = 0.3f;
+    private float shootSoundTimer = 0.3f;
+
     // Use this for initialization
     void Start()
     {
@@ -46,6 +51,10 @@ public class Player : MonoBehaviour
         SetCharacterRightFacing();
 
         anim = GetComponent<Animator>();
+
+        // also for use in temporary workaround for sounds
+        sounds = GetComponent<SoundManager>();
+
     }
 
     // Update is called once per frame
@@ -154,6 +163,9 @@ public class Player : MonoBehaviour
 
         // Raycast2D hit will give us information about other colliders 
         RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamDirection, maxDistance, LayerMask.GetMask("littlePig", "pig", "wall"));
+
+        // temporary code for shooting sounds
+        sounds.TCellShoot();
 
         //// check for collisions
         if (hit.collider != null)
