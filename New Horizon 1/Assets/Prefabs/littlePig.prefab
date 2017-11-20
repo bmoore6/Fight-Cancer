@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 50268888082202456}
   - component: {fileID: 58289754890976160}
   - component: {fileID: 114665770384901910}
+  - component: {fileID: 82963433111483700}
+  - component: {fileID: 114255809278969056}
   m_Layer: 13
   m_Name: littlePig
   m_TagString: littlePig
@@ -78,6 +80,129 @@ CircleCollider2D:
   m_Offset: {x: -0.0013084412, y: 0.095817566}
   serializedVersion: 2
   m_Radius: 0.7146225
+--- !u!82 &82963433111483700
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706553439309696}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114255809278969056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706553439309696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffede8d8fc654d442a27a7d93745587f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioS: {fileID: 82963433111483700}
+  tCellShoot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tCellSteps:
+  - {fileID: 0}
+  cytotoxinSplash:
+  - {fileID: 8300000, guid: cf54094d41286cb4795ce02c1821fb7d, type: 3}
+  - {fileID: 8300000, guid: 69838a24e709e684cb38355d40e088fd, type: 3}
+  - {fileID: 8300000, guid: 95454aceb02754b46aa11565937c6d2a, type: 3}
+  - {fileID: 8300000, guid: 7c092f8539bdc3245b980b457a98b477, type: 3}
+  - {fileID: 8300000, guid: 8c6b35938ad7baa489a334328c3cc398, type: 3}
+  - {fileID: 8300000, guid: 70a431925d3430a45b5a48aa017db911, type: 3}
+  - {fileID: 8300000, guid: 2a72113bf8d732c4987f621977b98149, type: 3}
+  - {fileID: 8300000, guid: 7b66a516db8226c459e2a2abced414c3, type: 3}
+  - {fileID: 8300000, guid: 0a4f459cecd874b418a2ebf9174bc2a3, type: 3}
+  - {fileID: 8300000, guid: 383788b5f12207449826c31392b61a21, type: 3}
+  - {fileID: 8300000, guid: cdbde9ffeb08a4c49afb37c2c501f383, type: 3}
+  - {fileID: 8300000, guid: a4d85d2346e0a584faec89107a5c4b7e, type: 3}
+  - {fileID: 8300000, guid: b034fb5187bb00a4b9faa9b25e073f39, type: 3}
+  cancerPigHit:
+  - {fileID: 0}
+  cancerPigAmbient:
+  - {fileID: 0}
+  menuSounds:
+  - {fileID: 0}
+  backgroundTrack:
+  - {fileID: 0}
 --- !u!114 &114665770384901910
 MonoBehaviour:
   m_ObjectHideFlags: 1
