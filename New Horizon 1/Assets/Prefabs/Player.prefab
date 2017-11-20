@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114780240641506198}
   - component: {fileID: 50690048821013188}
   - component: {fileID: 61561121492590914}
+  - component: {fileID: 82522275398195394}
+  - component: {fileID: 114536273684980920}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -88,6 +90,117 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20.52, y: 32.399998}
   m_EdgeRadius: 0
+--- !u!82 &82522275398195394
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397552332863256}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114536273684980920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397552332863256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffede8d8fc654d442a27a7d93745587f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioS: {fileID: 82522275398195394}
+  tCellShoot:
+  - {fileID: 8300000, guid: 1cded75528c10ae4ba17d0dd096883bf, type: 3}
+  - {fileID: 8300000, guid: 00d9ca85aa025bc45aca6a9674f3a3b5, type: 3}
+  - {fileID: 8300000, guid: d03fd0a4caef747459da6cbd17525efb, type: 3}
+  - {fileID: 8300000, guid: 5449ea34f491ac34ab17d7b143185360, type: 3}
+  - {fileID: 8300000, guid: 209c08d49bd865c4c926a835bdaae556, type: 3}
+  - {fileID: 8300000, guid: 2173769058189e9498832c56fcdc5397, type: 3}
+  tCellSteps:
+  - {fileID: 0}
+  cytotoxinSplash:
+  - {fileID: 0}
+  cancerPigHit:
+  - {fileID: 0}
+  cancerPigAmbient:
+  - {fileID: 0}
+  menuSounds:
+  - {fileID: 0}
+  backgroundTrack:
+  - {fileID: 0}
 --- !u!114 &114780240641506198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,8 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b091d9756b0445740ba29ed65d5a3146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 1311370920955168, guid: 727398dc19de41449bd287374eab7e91,
-    type: 2}
+  wallSplash: {fileID: 1247311496274568, guid: 3247a7e241ff2f94e9abd7c58a70a5dc, type: 2}
+  beamPrefab: {fileID: 1398986093315388, guid: d7c841a0ddf8ccd4796a0f6fbec2c681, type: 2}
   frontSprites: {fileID: 0}
   backSprites: {fileID: 0}
   moveSpeed: 70

@@ -10,6 +10,7 @@ TagManager:
   - Gate
   - Wall
   - particleEffect
+  - littlePig
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - bullet
   - pig
   - particleEffect
-  - 
-  - 
+  - littlePig
+  - wall
   - 
   - 
   - 

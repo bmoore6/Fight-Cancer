@@ -4,136 +4,225 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
+    private enum Facing { down, up };
+
     //exploding pig particle effect
     [SerializeField]
     GameObject pigParticle;
-    //timer fields
-    Timer spawnTimer;
-    [SerializeField]
-    float timeDelay;
 
     //assign sprites
     [SerializeField]
-    Sprite FrontSprite;
+    GameObject frontSprites;
 
     [SerializeField]
-    Sprite BackSprite;
+    GameObject backSprites;
 
+    // flock of pigs that the big pig can spawn
     [SerializeField]
-    Sprite LeftSprite;
-
-    [SerializeField]
-    Transform[] patrolPoints;
+    GameObject flockOpigs;
 
     Rigidbody2D rb2d;
 
     float speed = 40f;
 
-    Transform currentPatrolPoint;
-
-    int currentPatrolIndex;
-
-    SpriteRenderer sr;
-
     //count how many times the pig gets shot
-    private int hitCounter = 0;
-    private int hitsBeforeDeath = 5;
+    int hitCounter = 0;
+    int hitsBeforeDeath = 25;
+
+    private Animator anim;
+    private Facing directionFacing;
+
+    //pig's current tree target
+    GameObject treeTarget;
+
+    //object state
+    public enum State {wandering, attackTree, still};
+    public State pigState;
+
+    //navigation
+    Vector2 prevPosition;//pig's position during the previous frame
+    Vector3 direction;//pig's random direction
+    int moveAwayTime;
 
     // Use this for initialization
     void Start()
     {
-        //timer support
-        // create and start timer
-        spawnTimer = gameObject.AddComponent<Timer>();
-        spawnTimer.Duration = timeDelay;
-        spawnTimer.Run();
-
         rb2d = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-        currentPatrolIndex = 0;
-        currentPatrolPoint = patrolPoints[currentPatrolIndex];
         rb2d.freezeRotation = true;
+        pigState = State.wandering;
+        direction = new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, 0).normalized;
+        if(direction.y <= 0)
+        {
+            directionFacing = Facing.down;
+        }
+        else
+        {
+            directionFacing = Facing.up;
+        }
+        moveAwayTime = 0;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawnTimer.Finished == true)
+
+        // get direction to move in
+        float deltaX = prevPosition.x - transform.position.x;
+        float deltaY = prevPosition.y - transform.position.y;
+        float rads = Mathf.Atan2(deltaY, deltaX);
+        float angle = Mathf.Rad2Deg * rads;
+        float x = Mathf.Cos(rads);
+        float y = Mathf.Sin(rads);
+
+        //moving down left
+        if (x < 0 && y < 0)
         {
-            // get direction to move in
-            float deltaX = currentPatrolPoint.position.x - transform.position.x;
-            float deltaY = currentPatrolPoint.position.y - transform.position.y;
-            float rads = Mathf.Atan2(deltaY, deltaX);
-            float angle = Mathf.Rad2Deg * rads;
-            float x = Mathf.Cos(rads);
-            float y = Mathf.Sin(rads);
+            transform.localScale = new Vector3(3f, 3f, 1f);
+            directionFacing = Facing.up;
+        }
+        //moving down right
+        else if (x > 0 && y < 0)
+        {
+            transform.localScale = new Vector3(-3f, 3f, 1f);
+            directionFacing = Facing.up;
+        }
+        //moving up left
+        else if (x < 0 && y > 0)
+        {
+            transform.localScale = new Vector3(-3f, 3f, 1f);
+            directionFacing = Facing.down;
+        }
+        //moving up right
+        else if (x > 0 && y > 0)
+        {
+            transform.localScale = new Vector3(3f, 3f, 1f);
+            directionFacing = Facing.down;
+        }
 
-            //moving down left
-            if (x <= 0 && y <= 0)
-            {
-                sr.flipX = false;
-                sr.sprite = FrontSprite;
-            }
-            //moving down right
-            else if (x >= 0 && y <= 0)
-            {
-                sr.flipX = true;
-                sr.sprite = FrontSprite;
-            }
-            //moving up left
-            else if (x <= 0 && y >= 0)
-            {
-                sr.flipX = false;
-                sr.sprite = BackSprite;
-            }
-            //moving up right
-            else if (x >= 0 && y >= 0)
-            {
-                sr.flipX = true;
-                sr.sprite = BackSprite;
-            }
+        if(directionFacing == Facing.down)
+        {
+            frontSprites.SetActive(true);
+            backSprites.SetActive(false);
+        }
+        else
+        {
+            frontSprites.SetActive(false);
+            backSprites.SetActive(true);
+        }
 
+        if (pigState == State.still)
+        {
+            rb2d.MovePosition(transform.position + direction * speed/10 * Time.deltaTime);
+            if (direction.y < 0)
+            {
+                directionFacing = Facing.up;
+            }
+            else
+            {
+                directionFacing = Facing.down;
+            }
+            if(directionFacing == Facing.down)
+            {
+                anim.Play("idle_front");
+            }
+            else
+            {
+                anim.Play("idle_back");
+            }
+        }
 
-            // move in that direction
+        //testing merge
+        //set previous position to current
+        if (pigState != State.still)
+        {
+            prevPosition = gameObject.transform.position;
+            if(directionFacing == Facing.down)
+            {
+                anim.Play("walk_front");
+            }
+            else
+            {
+                anim.Play("walk_back");
+            }
+            // move in that direction if not still
             //transform.Translate(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime * speed);
-            rb2d.MovePosition(transform.position + new Vector3(x, y, 0) * speed * Time.deltaTime);
-
-            //check if arrived at patrol point 
-            if (Vector3.Distance(transform.position, currentPatrolPoint.position) < .4f)
-            {
-                //we have reached patrol point
-                //check to see if there are more patrol points
-                //if not return to first patrol point
-                if (currentPatrolIndex + 1 < patrolPoints.Length)
-                {
-                    currentPatrolIndex++;
-
-                }
-                else
-                {
-                    currentPatrolIndex = 0;
-                }
-                currentPatrolPoint = patrolPoints[currentPatrolIndex];
-            }
+            rb2d.MovePosition(transform.position + direction * speed * Time.deltaTime);
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (moveAwayTime > 0)
+        {
+            moveAwayTime--;
+        }
+        if (moveAwayTime == 1)
+        {
+            direction = new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, 0).normalized;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Damage the pig
+    /// </summary>
+    public void AddDamage()
     {
-        if (collision.gameObject.tag == "bullet")
+        hitCounter += 1;
+        if (hitCounter >= hitsBeforeDeath)
         {
-            hitCounter += 1;
-            if (hitCounter >= hitsBeforeDeath)
-            {
-                //destroy the pig!
-                Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject);
-                GameManager.win();
-            }
-
-            //destroy the bullet that collided with the pig
-            Destroy(collision.gameObject);
+            //destroy the pig!
+            Instantiate(pigParticle, gameObject.transform.position, Quaternion.identity);
+            Instantiate(flockOpigs, gameObject.transform.position, Quaternion.identity);
+            GameManager.GM.win();
+            Destroy(gameObject);
         }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {       
+        if (collision.gameObject.tag != "tree"||collision.gameObject.GetComponent<TreeScript>().Health<.15f)
+        {
+            direction = direction * -1;
+            moveAwayTime = 3;
+            gameObject.transform.position = prevPosition;
+        }
+        else
+        {
+            pigState = State.still;
+        }
+    }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "tree")
+        {
+            MoveOn();
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "tree" && collision.gameObject.GetComponent<TreeScript>().Health <= .15)
+        {
+            MoveOn();
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "tree"&&collision.gameObject.GetComponent<TreeScript>().Health > .15f&&pigState==State.wandering)
+        {
+            treeTarget = collision.gameObject;
+            pigState = State.attackTree;
+            direction = (treeTarget.transform.position- gameObject.transform.position).normalized;
+        }
+    }
+    public void MoveOn()
+    {
+        treeTarget = null;
+        gameObject.transform.position = prevPosition;
+        pigState = State.wandering;
+        direction = direction * -1;
+        moveAwayTime = 2;
     }
 }
 	

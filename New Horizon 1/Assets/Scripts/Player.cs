@@ -8,7 +8,10 @@ public class Player : MonoBehaviour
     private enum Facing { down, up };
 
     [SerializeField]
-    GameObject BulletPrefab;
+    GameObject wallSplash;
+
+    [SerializeField]
+    GameObject beamPrefab;
 
     [SerializeField]
     GameObject frontSprites;
@@ -30,18 +33,28 @@ public class Player : MonoBehaviour
 
     private Facing direction;
 
+    private Animator anim;
 
+    // temporary workaround for setting up sounds
+    SoundManager sounds;
+    private float shootSoundTimerMax = 0.3f;
+    private float shootSoundTimer = 0.3f;
 
     // Use this for initialization
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        direction = Facing.down;
-        frontSprites.SetActive(true);
-        frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-        backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
-        backSprites.SetActive(false);
+
+        //initialize character orientation
+        SetCharacterFrontFacing();
+        SetCharacterRightFacing();
+
+        anim = GetComponent<Animator>();
+
+        // also for use in temporary workaround for sounds
+        sounds = GetComponent<SoundManager>();
+
     }
 
     // Update is called once per frame
@@ -52,17 +65,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Vertical") < 0)
             {
-                //assign sprite front
-                frontSprites.SetActive(true);
-                backSprites.SetActive(false);
-                direction = Facing.down;
+                SetCharacterFrontFacing();
             }
             else
             {
-                //assigns sprite back
-                frontSprites.SetActive(false);
-                backSprites.SetActive(true);
-                direction = Facing.up;
+                SetCharacterRearFacing();
             }
 
             //Moves Forward and back along y axis  
@@ -74,13 +81,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
-                backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+                SetCharacterRightFacing();
             }
             else
             {
-                frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
-                backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+                SetCharacterLeftFacing();
             }
             //Moves Left and right along x Axis  
             rb2d.MovePosition(transform.position + Vector3.right * Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime);
@@ -88,60 +93,36 @@ public class Player : MonoBehaviour
 
         rb2d.MovePosition(transform.position + new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * moveSpeed * Time.deltaTime);
 
-        //calculate angle to shoot bullet at
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float deltaX = mousePosition.x - transform.position.x;
-        float deltaY = mousePosition.y - transform.position.y;
-        float rads = Mathf.Atan2(deltaY, deltaX);
-        float angle = Mathf.Rad2Deg * rads;
-        //transform.eulerAngles = new Vector3(0, 0, angle);
-
-        //get shoot input
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject projectile = Instantiate(BulletPrefab);
-            projectile.transform.position = transform.position;
-            projectile.transform.eulerAngles = new Vector3(0, 0, angle);
-            if(direction == Facing.down)
-            {
-                GetComponent<Animator>().Play("shoot_front");
-            }
-            else
-            {
-                GetComponent<Animator>().Play("shoot_back");
-            }
-        }
+        //check if player if holding left mouse button, if so then fire cytotoxin beam
+        if (Input.GetMouseButton(0) && GameManager.GM.isPause() == false) { FireCytoBeam(); }
 
         // Animation Logic
-
-        if(Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+        if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
         {
             if(direction == Facing.down)
             {
-                GetComponent<Animator>().Play("idle_front");
+                anim.Play("idle_front");
             }
             else
             {
-                GetComponent<Animator>().Play("idle_back");
+                anim.Play("idle_back");
             }
         }
-
         if(Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)
         {
             if(direction == Facing.down)
             {
-                GetComponent<Animator>().Play("walk_front");
+                anim.Play("walk_front");
             }
             else
             {
-                GetComponent<Animator>().Play("walk_back");
-            }
+                anim.Play("walk_back");
+           }
         }
-
     }
 
     // check for collision with wall
-    void OnCollisionEnter2D(Collision2D coll)
+   void OnCollisionEnter2D(Collision2D coll)
     {
 
         // if colliding with wall and moving vertically move back
@@ -149,5 +130,124 @@ public class Player : MonoBehaviour
         {
             rb2d.velocity = Vector3.zero;
         }
+    }
+
+    /// <summary>
+    /// Get the origin of the CytoBeam. This will require some tweaking later
+    /// </summary>
+    /// <returns></returns>
+    Vector2 CalculateBeamOrigin() {
+
+        Vector2 currentPlayerPosition = transform.position;
+        //currentPlayerPosition.y += 3;
+        return currentPlayerPosition;
+    }
+
+    /// <summary>
+    /// Handles player firing cytoToxin beam
+    /// </summary>
+    void FireCytoBeam()
+    {
+        // calculate current beam origin
+        Vector2 beamOrigin = CalculateBeamOrigin();
+
+        // current mouse cursor position. Typecasting to Vector2.
+        Vector2 mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // calculate direction from player to mouse cursor
+        Vector2 beamDirection = mousePos - beamOrigin;
+
+        // Use the magnitude of beamDirection to set max distance parameter of RayCast2D
+        float maxDistance = beamDirection.magnitude;
+        beamDirection.Normalize();
+
+        // Raycast2D hit will give us information about other colliders 
+        RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamDirection, maxDistance, LayerMask.GetMask("littlePig", "pig", "wall"));
+
+        // temporary code for shooting sounds
+        //sounds.TCellShoot();
+
+        //// check for collisions
+        if (hit.collider != null)
+        {
+            //kill little pigs
+            if (hit.collider.tag == "littlePig") { hit.collider.gameObject.GetComponent<Unit>().AddDamage(); }
+
+            //kill big pigs
+            else if (hit.collider.tag == "Pig") { hit.collider.gameObject.GetComponent<EnemyAi>().AddDamage(); }
+
+            //Cytotoxin beam hitting wall....create a splash
+            else { Instantiate(wallSplash, hit.point, Quaternion.identity); }
+
+            //set endpoint of the line equal to the point of impact
+            mousePos = hit.point;
+        }
+
+        // render a cytotoxin beam
+        GameObject cytoBeam = Instantiate(beamPrefab);
+        Vector3[] beamPos = new Vector3[2];
+        beamPos[0] = beamOrigin; //point at which the line begins
+        beamPos[1] = mousePos; //point at while the line ends
+
+        //face character in direction of beam
+        FaceCharacterInBeamDirection(beamPos);
+
+        // Set beam start and end points--->Render beam to screen
+        cytoBeam.GetComponent<LineRenderer>().SetPositions(beamPos);
+
+        //if (direction == Facing.down)
+        //{
+        //    anim.Play("shoot_front");
+        //}
+        //else
+        //{
+        //    anim.Play("shoot_back");
+        //}       
+    }
+    /// <summary>
+    /// This method forces the player character to face the direction of the beam
+    /// </summary>
+    /// <param name="beam"></param>
+    void FaceCharacterInBeamDirection(Vector3[] beam)
+    {
+        if (beam[0].y >= beam[1].y)
+        {
+            SetCharacterFrontFacing();
+        }
+        else { SetCharacterRearFacing(); }
+
+        if (beam[0].x >= beam[1].x)
+        {
+            SetCharacterRightFacing();
+        }
+        else { SetCharacterLeftFacing(); }
+    }
+
+    /// <summary>
+    /// Note: Method names are self-explanatory
+    /// </summary>
+    void SetCharacterFrontFacing()
+    {
+        //assign sprite front
+        frontSprites.SetActive(true);
+        backSprites.SetActive(false);
+        direction = Facing.down;
+    }
+    void SetCharacterRearFacing()
+    {
+        //assigns sprite back
+        frontSprites.SetActive(false);
+        backSprites.SetActive(true);
+        direction = Facing.up;
+    }
+    void SetCharacterRightFacing()
+    {
+        frontSprites.transform.localScale = new Vector3(1f, 1f, 1f);
+        backSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+    void SetCharacterLeftFacing()
+    {
+        frontSprites.transform.localScale = new Vector3(-1f, 1f, 1f);
+        backSprites.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
