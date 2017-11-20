@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(beamOrigin, beamDirection, maxDistance, LayerMask.GetMask("littlePig", "pig", "wall"));
 
         // temporary code for shooting sounds
-        sounds.TCellShoot();
+        //sounds.TCellShoot();
 
         //// check for collisions
         if (hit.collider != null)
